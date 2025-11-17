@@ -1,0 +1,279 @@
+import java.util.*;
+
+
+//Array Template
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Step 1: Input
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        for(int i=0; i<n; i++){
+            arr[i] = sc.nextInt();
+        }
+
+        // Step 2: Logic (Yahin question ka main code likhna hota hai)
+        // Example: sum, max, min, count, search, sort etc.
+
+        // -------- WRITE YOUR LOGIC HERE --------
+        int result = 0;
+        for(int i=0; i<n; i++){
+            result += arr[i];    // just example (sum)
+        }
+        // ----------------------------------------
+
+        // Step 3: Output
+        System.out.println(result);
+    }
+}
+
+
+
+
+
+//String Template
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Step 1: Input
+        String s = sc.nextLine();
+
+        // Step 2: Logic
+        // Example: reverse, count vowels, frequency, palindrome, etc.
+
+        // -------- WRITE YOUR LOGIC HERE --------
+        String ans = "";
+        for(int i = s.length()-1; i >= 0; i--){
+            ans += s.charAt(i);    // example: reverse
+        }
+        // ----------------------------------------
+
+        // Step 3: Output
+        System.out.println(ans);
+    }
+}
+
+
+//singly linjed list
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data){
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    Node head;
+
+    // INSERT at end
+    void insert(int data){
+        Node newNode = new Node(data);
+        if(head == null){
+            head = newNode;
+            return;
+        }
+        Node temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+
+    // DELETE a value
+    void delete(int key){
+        if(head == null) return;
+
+        if(head.data == key){
+            head = head.next;
+            return;
+        }
+
+        Node temp = head;
+        while(temp.next != null && temp.next.data != key){
+            temp = temp.next;
+        }
+
+        if(temp.next != null){
+            temp.next = temp.next.next;
+        }
+    }
+
+    // PRINT list
+    void print(){
+        Node temp = head;
+        while(temp != null){
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
+
+
+
+
+//Doubly
+
+class DNode {
+    int data;
+    DNode prev, next;
+
+    DNode(int data){
+        this.data = data;
+        this.prev = this.next = null;
+    }
+}
+
+class DoublyLL {
+    DNode head;
+
+    // INSERT
+    void insert(int data){
+        DNode newNode = new DNode(data);
+
+        if(head == null){
+            head = newNode;
+            return;
+        }
+
+        DNode temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+        newNode.prev = temp;
+    }
+
+    // DELETE
+    void delete(int key){
+        if(head == null) return;
+
+        if(head.data == key){
+            head = head.next;
+            if(head != null) head.prev = null;
+            return;
+        }
+
+        DNode temp = head;
+        while(temp != null && temp.data != key){
+            temp = temp.next;
+        }
+
+        if(temp != null){
+            if(temp.prev != null) temp.prev.next = temp.next;
+            if(temp.next != null) temp.next.prev = temp.prev;
+        }
+    }
+
+    void print(){
+        DNode temp = head;
+        while(temp != null){
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+    }
+}
+
+
+//Stack
+
+class Stack {
+    int top = -1;
+    int size = 5;
+    int arr[] = new int[size];
+
+    void push(int x){
+        if(top == size - 1){
+            System.out.println("Overflow");
+            return;
+        }
+        arr[++top] = x;
+    }
+
+    int pop(){
+        if(top == -1){
+            System.out.println("Underflow");
+            return -1;
+        }
+        return arr[top--];
+    }
+
+    int peek(){
+        return arr[top];
+    }
+}
+
+
+//Queue
+
+class Queue {
+    int arr[] = new int[5];
+    int front = 0, rear = -1, size = 0;
+
+    void enqueue(int x){
+        if(size == arr.length){
+            System.out.println("Overflow");
+            return;
+        }
+        rear = (rear + 1) % arr.length;
+        arr[rear] = x;
+        size++;
+    }
+
+    int dequeue(){
+        if(size == 0){
+            System.out.println("Underflow");
+            return -1;
+        }
+        int val = arr[front];
+        front = (front + 1) % arr.length;
+        size--;
+        return val;
+    }
+}
+
+
+//Btree
+
+class BTreeNode {
+    int keys[];
+    int t;
+    BTreeNode[] child;
+    int n;
+    boolean leaf;
+
+    BTreeNode(int t, boolean leaf){
+        this.t = t;
+        this.leaf = leaf;
+        keys = new int[2*t - 1];
+        child = new BTreeNode[2*t];
+        n = 0;
+    }
+}
+
+
+// B+ Tree
+
+class BPlusTreeNode {
+    boolean isLeaf;
+    int keys[];
+    BPlusTreeNode[] child;
+
+    BPlusTreeNode(int t){
+        keys = new int[2*t - 1];
+        child = new BPlusTreeNode[2*t];
+        isLeaf = true;
+    }
+}
+
+
